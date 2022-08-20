@@ -1,68 +1,99 @@
 <header>
+  <p class="companyName">COMPANY CRM</p>
   <div>
-    <p>Company 
-      
-      CRM</p>
-    <div>
-      <!-- <p> {{ customer.email }}</p> -->
-      <p>Customers</p>
-      <button (click)="logout()">Logout</button>
+   
+    <div class="headerDiv">
+      <p class="customers">Customers</p>
+      <!-- <p> {{ user.email }}</p> -->
+      <button (click)="logout()" class="logoutButton">Logout</button>
     </div>
   </div>
 </header>
-<form *ngIf="!registerSuccess" [formGroup]="customerRegForm" (ngSubmit)="onSumbit()"></form>
+<form
+  *ngIf="!registerSuccess"
+  [formGroup]="customerRegForm"
+  (ngSubmit)="onSumbit()"
+></form>
 <div>
-  <form [formGroup]="customerRegForm" (ngSubmit)="onSumbit()">
-    <div>
-      <input type="text" formControlName="first_name" placeholder="First Name"/>
-      <input type="text" formControlName="last_name" placeholder="Last Name" />
-      <input type="text" formControlName="email" placeholder="Email" />
-      <input type="text" formControlName="phone" placeholder="Phone" />
-      <button type="submit">Add customer</button>
+  <form
+    [formGroup]="customerRegForm"
+    class="addCustomerFormContainer"
+    (ngSubmit)="onSumbit()"
+  >
+    <div class="addCustomer">
+      <input
+        type="text" class='addCustomerInput'
+        formControlName="first_name"
+        placeholder="First Name"
+      />
+      <input  type="text" class='addCustomerInput' formControlName="last_name" placeholder="Last Name" />
+      <input type="text" class='addCustomerInput' formControlName="email" placeholder="Email" />
+      <input type="text" class='addCustomerInput' formControlName="phone" placeholder="Phone" />
+      <button type="submit" class='addCustomerInput' class="addCustomerSubmit">Add customer</button>
     </div>
   </form>
   <div>
     <table>
       <tr>
-        <td>Id</td>
-        <td>First Name</td>
-        <td>Last name</td>
-        <td>Email</td>
-        <td>Phone</td>
+        <td class="id headerTable">Id</td>
+        <td class="name headerTable">First Name</td>
+        <td class="name headerTable">Last name</td>
+        <td class="name headerTable">Email</td>
+        <td class="name headerTable">Phone</td>
+        <td class="name headerTable"></td>
+      </tr>
+
+      <tr *ngFor="let customer of customers">
+        <td class="id">{{ customer.id }}</td>
+        <td class="name">{{ customer.first_name }}</td>
+        <td class="name">{{ customer.last_name }}</td>
+        <td class="name">{{ customer.email }}</td>
+        <td class="name">{{ customer.phone }}</td>
         <td>
-         
+          <button
+            class="buttonIcon"
+            [innerHTML]="buttonEdit"
+            (click)="openEditPopUp(customer)"
+          ></button>
+          <button
+            class="buttonIcon"
+            [innerHTML]="buttonDelete"
+            (click)="openDeletePopUp(customer)"
+          ></button>
         </td>
       </tr>
     </table>
-
-    <table *ngFor="let customer of customers">
-      <td>{{ customer.id }}</td>
-      <td>{{ customer.first_name }}</td>
-      <td>{{ customer.last_name }}</td>
-      <td>{{ customer.email }}</td>
-      <td>{{ customer.phone }}</td>
-      <td>
-         <button  [innerHTML]="buttonEdit" (click)="openEditPopUp(customer)"></button>
-        <button [innerHTML]="buttonDelete" (click)="openDeletePopUp(customer)"></button></td>
-    </table>
   </div>
   <div *ngIf="customerToDelete || customerToEdit" ngClass="glass">
-     <div ngClass="popUpContainer">
-        <div *ngIf="customerToDelete">
-          <p>Are you shure you want to delete {{ customerToDelete.first_name }}</p>
-          <button (click)="popUpCancel()">Cancel</button>
-          <button (click)="deleteCustomer(customerToDelete.id)">Delete</button>
-        </div>
-      <div>
-      
-      <form [formGroup]="customerEditForm()" *ngIf="customerToEdit" (ngSubmit)="editCustomer()">
-         <label>First Name: <input type="text" formControlName="first_name" /></label><br>
-         <label>Last Name: <input type="text" formControlName="last_name"  /></label><br>
-         <label>E-mail: <input type="text" formControlName="email"  /></label><br>
-         <label>Phone: <input type="text" formControlName="phone" /></label><br>
-         <button (click)="popUpCancel()">Cancel</button>
-         <button type="submit">Save changes</button>
-      </form>
+    <div ngClass="popUpContainer">
+      <div *ngIf="customerToDelete" class="popUpWindow">
+        <p class="headerTable marginV">
+          Are you shure you want to delete
+        </p>
+        <p class="headerTable marginV bigFont">
+          {{ customerToDelete.first_name }}
+        </p>
+        <button (click)="popUpCancel()" class="popUpButton">Cancel</button>
+        <button (click)="deleteCustomer(customerToDelete.id)" class="popUpButton">Delete</button>
+      </div>
+
+      <div class="popUpWindow">
+        <form [formGroup]="customerEditForm()" *ngIf="customerToEdit" (ngSubmit)="editCustomer()">
+          <table>
+          <tr><td>First Name: </td><td><input type="text" class='popUpInput' formControlName="first_name"/></td></tr>
+          <tr><td>Last Name: </td><td><input type="text" class='popUpInput' formControlName="last_name"/></td></tr>
+          <tr><td>E-mail: </td><td><input type="text" class='popUpInput' formControlName="email" /></td></tr>
+          <tr><td>Phone: </td><td><input type="text" class='popUpInput' formControlName="phone" /></td></tr>
+          <tr><td>
+            <button class="popUpButton" (click)="popUpCancel()">Cancel</button>
+            </td><td>
+            <button type="submit" class="popUpButton">Save changes</button>
+          </td>
+          </tr>
+        </table>
+        </form>
+      </div>
     </div>
   </div>
+  <!-- </div> -->
 </div>
