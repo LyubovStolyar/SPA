@@ -1,0 +1,60 @@
+*{
+    display: block;
+    padding: 0;
+    margin: 0 auto;
+}
+
+.mainElem{
+position: absolute;
+width: 50vw;
+height: 40wh;
+top: 15%;
+left: 25vw;
+/* background-color: rgb(227, 227, 227); */
+
+}
+input{
+    /* margin: 1px; */
+    padding: 0.4vh;
+    border: rgb(118, 142, 126) solid 1px;
+    /* text-align: center; */
+    width: 50%;
+    height: 3vh;
+}
+.inputDiv{
+  text-align: center;
+}
+p{
+    color: rgb(35, 86, 94);
+    font-size: 0.9rem;
+    /* margin: 2%; */
+    padding: 1%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+}
+.newAccount,
+.companyName
+{
+    color: rgb(0, 129, 86);
+    font-size: 1.2rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+}
+.companyName{
+    font-size: 1.9rem;
+    padding: 1vh;
+}
+
+button{
+/* margin: 1%; */
+    width: 20vw;
+    height: 4vh;
+    font-size: 1rem;
+    text-align: center;
+    color: rgb(255, 255, 255);
+    margin: 4% auto;
+    background-color: rgb(148, 169, 165);
+}
+a{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}

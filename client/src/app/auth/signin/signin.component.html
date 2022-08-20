@@ -1,0 +1,41 @@
+<div class="mainElem">
+
+<div class="companyName">COMPANY CRM</div>
+
+<p class="newAccount">Create new account</p>
+<form *ngIf="!registerSuccess" [formGroup]="signinForm" (ngSubmit)="onSubmit()"></form>
+<div class="inputDiv">
+  <form [formGroup]="signinForm" (ngSubmit)="onSumbit()">
+    <div>
+      <p>First Name</p>
+      <input type="text" #first formControlName="first_name" placeholder="Name" />
+    </div>
+
+    <div>
+      <p>Email</p>
+      <input type="email" formControlName="email" placeholder="Email" />
+    </div>
+
+    <div>
+      <p>Password</p>
+      <input type="text" formControlName="password" placeholder="Password" />
+    </div>
+
+    <div>
+      <p>Repeat password</p>
+      <input type="text" formControlName="repeatPassword" placeholder="Repeat password" />
+    </div>
+
+    <button [disabled]="!signinForm.valid" type="submit">Sign Up</button>
+
+
+  </form>
+  <a routerLink="/login">Go back to log in</a>
+  <p>© 2022</p>
+</div>
+
+<div *ngIf="registerSuccess">
+  You have created new account successfully.
+  <a routerLink="/login-component">Login to your account</a>
+</div>
+</div>

@@ -1,0 +1,25 @@
+<div class="mainElem">
+<div class="companyName">Company CRM</div>
+
+<p class="newAccount">Login with your account</p>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+<div>
+  <label for="" class="form-label">Email</label>
+  <input #emailField type="email" formControlName="email" placeholder="email" />
+</div>
+
+<div>
+  <label for="" class="form-label">Password</label>
+  <input type="text" formControlName="password" placeholder="Password" />
+</div>
+
+<button [disabled]="!loginForm.valid" type="submit" class="btn btn-primary">Login</button>
+</form>
+
+<div>
+  <a routerLink="/signin" routerLinkActive="active" ariaCurrentWhenActive="page"
+      class="">Create New Account</a>
+</div>
+
+<p>© 2022</p>
+</div>

@@ -1,0 +1,68 @@
+<header>
+  <div>
+    <p>Company 
+      
+      CRM</p>
+    <div>
+      <!-- <p> {{ customer.email }}</p> -->
+      <p>Customers</p>
+      <button (click)="logout()">Logout</button>
+    </div>
+  </div>
+</header>
+<form *ngIf="!registerSuccess" [formGroup]="customerRegForm" (ngSubmit)="onSumbit()"></form>
+<div>
+  <form [formGroup]="customerRegForm" (ngSubmit)="onSumbit()">
+    <div>
+      <input type="text" formControlName="first_name" placeholder="First Name"/>
+      <input type="text" formControlName="last_name" placeholder="Last Name" />
+      <input type="text" formControlName="email" placeholder="Email" />
+      <input type="text" formControlName="phone" placeholder="Phone" />
+      <button type="submit">Add customer</button>
+    </div>
+  </form>
+  <div>
+    <table>
+      <tr>
+        <td>Id</td>
+        <td>First Name</td>
+        <td>Last name</td>
+        <td>Email</td>
+        <td>Phone</td>
+        <td>
+         
+        </td>
+      </tr>
+    </table>
+
+    <table *ngFor="let customer of customers">
+      <td>{{ customer.id }}</td>
+      <td>{{ customer.first_name }}</td>
+      <td>{{ customer.last_name }}</td>
+      <td>{{ customer.email }}</td>
+      <td>{{ customer.phone }}</td>
+      <td>
+         <button  [innerHTML]="buttonEdit" (click)="openEditPopUp(customer)"></button>
+        <button [innerHTML]="buttonDelete" (click)="openDeletePopUp(customer)"></button></td>
+    </table>
+  </div>
+  <div *ngIf="customerToDelete || customerToEdit" ngClass="glass">
+     <div ngClass="popUpContainer">
+        <div *ngIf="customerToDelete">
+          <p>Are you shure you want to delete {{ customerToDelete.first_name }}</p>
+          <button (click)="popUpCancel()">Cancel</button>
+          <button (click)="deleteCustomer(customerToDelete.id)">Delete</button>
+        </div>
+      <div>
+      
+      <form [formGroup]="customerEditForm()" *ngIf="customerToEdit" (ngSubmit)="editCustomer()">
+         <label>First Name: <input type="text" formControlName="first_name" /></label><br>
+         <label>Last Name: <input type="text" formControlName="last_name"  /></label><br>
+         <label>E-mail: <input type="text" formControlName="email"  /></label><br>
+         <label>Phone: <input type="text" formControlName="phone" /></label><br>
+         <button (click)="popUpCancel()">Cancel</button>
+         <button type="submit">Save changes</button>
+      </form>
+    </div>
+  </div>
+</div>
